@@ -1,11 +1,11 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from 'tailwindcss'
+import tailwindConfig from './tailwind.config.cjs'
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(),
-    tailwindcss(),
-    require("tailwindcss")
+    tailwindcss(tailwindConfig),
   ],
 })

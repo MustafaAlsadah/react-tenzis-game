@@ -2,13 +2,14 @@ import Die from "./Die"
 import { useState, useEffect } from "react"
 import Confetti from "react-confetti";
 
-export default function Board(){
+export default function Board(props){
+
     const [dicesValues, setDicesValues] = useState(generateDiecesValues())
-    const [tenzies, setTenzies] = useState(false)
+    
 
     useEffect(()=>{        
         if(isWinner()){
-            setTenzies(true)
+            props.setTenziesValue(true)
         }
     }, [dicesValues])
 
@@ -39,9 +40,9 @@ export default function Board(){
     }
 
     function rollDice(){
-        if(tenzies){
+        if(props.tenzies){
             setDicesValues(generateDiecesValues())
-            setTenzies(false)
+            props.setTenziesValue(false)
         }else{
             setDicesValues(prevArr => prevArr.map(die=>{
                 return die.isHeld ? die : {...die, value: generateDieValue()}
@@ -50,9 +51,8 @@ export default function Board(){
     }
 
     return(
-        <div className="bg-slate-200 h-5/6 w-5/6 max-w-xl rounded-xl">
-            {tenzies && <Confetti/>}
-            
+        <div className="bg-slate-200 h-full w-5/6 max-w-xl rounded-xl p-8">
+            {props.tenzies && <Confetti/>}
             <div className="flex flex-col justify-evenly items-center h-full w-full">
                 <div className="flex flex-col justify-center items-center space-y-3">
                     <h1 className="text-black text-5xl font-semibold">Tenzies</h1>
@@ -63,9 +63,10 @@ export default function Board(){
                         dicesValues.map(obj => <Die id={obj.id} value={obj.value} isHeld={obj.isHeld} key={obj.id} holdDice={()=> holdDice(obj.id)} />)
                     }
                 </div>
-                <button className="bg-indigo-600 px-10 py-3 rounded-md hover:scale-110 transition-all" onClick={()=> rollDice()}>
-                    {tenzies ? "Reset Game" : "Roll"}
+                <button className="bg-indigo-600 mt-4 text-white px-10 py-3 rounded-md hover:scale-110 transition-all" onClick={()=> rollDice()}>
+                    {props.tenzies ? "Reset Game" : "Roll"}
                 </button>
+                <blockquote className="text-indigo-600">By Mustafa Alsadah</blockquote>
             </div>
         </div>
     )

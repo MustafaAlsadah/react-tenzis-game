@@ -47,10 +47,10 @@ function App() {
   return (
     <div className="bg-slate-800 h-screen w-screen text-wcenterhite p-6  flex flex-col justify-center items-center">
       <div className="flex justify-between w-5/6 max-w-xl">
-        <div className="text-black bg-slate-50 w-1/4 px-4 py-2 rounded-md text- mb-5">
+        <div className="text-black bg-slate-50 p-2 md:w-1/4 md:px-4 md:py-2 rounded-md text- mb-5">
             {elapsedTime<60 ? `${elapsedTime} seconds` : `${Math.floor(elapsedTime/60)}:${Math.floor(elapsedTime%60)} minutes`}
         </div>
-        <div className="text-black bg-green-400 w-fit px-4 py-2 rounded-md text- mb-5">
+        <div className="text-black bg-green-400 p-2 md:w-fit md:px-4 md:py-2 rounded-md text- mb-5">
           best score: {bestScore<60 ? `${bestScore} seconds` : `${Math.floor(bestScore/60)}:${Math.floor(bestScore%60)} minutes`} 
         </div>
       </div>

@@ -43,6 +43,7 @@ export default function Board(props){
         if(props.tenzies){
             setDicesValues(generateDiecesValues())
             props.setTenziesValue(false)
+            props.resetInterval()
         }else{
             setDicesValues(prevArr => prevArr.map(die=>{
                 return die.isHeld ? die : {...die, value: generateDieValue()}
